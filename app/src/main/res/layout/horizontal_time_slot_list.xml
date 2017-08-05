@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="horizontal">
+
+
+    <com.neeru.client.views.ButtonView
+        android:id="@+id/time_68am"
+        android:layout_width="@dimen/time_slot_width"
+        android:layout_height="@dimen/time_slot_height"
+        android:background="@drawable/timeslot_button_selector"
+        android:text="8-10 AM"
+        android:textColor="@color/text_color"
+        android:textSize="17sp"
+        app:fontName="Roboto_Bold" />
+
+    <com.neeru.client.views.ButtonView
+        android:id="@+id/time_1012am"
+        android:layout_width="@dimen/time_slot_width"
+        android:layout_height="@dimen/time_slot_height"
+        android:layout_marginLeft="@dimen/time_slot_padding"
+        android:background="@drawable/timeslot_button_selector"
+        android:text="10-12 AM"
+        android:textColor="@color/text_color"
+        android:textSize="17sp"
+        app:fontName="Roboto_Bold" />
+
+    <com.neeru.client.views.ButtonView
+        android:id="@+id/time_24pm"
+        android:layout_width="@dimen/time_slot_width"
+        android:layout_height="@dimen/time_slot_height"
+        android:layout_marginLeft="@dimen/time_slot_padding"
+        android:background="@drawable/timeslot_button_selector"
+        android:text="2-4 PM"
+        android:textColor="@color/text_color"
+        android:textSize="17sp"
+        app:fontName="Roboto_Bold" />
+
+    <com.neeru.client.views.ButtonView
+        android:id="@+id/time_46pm"
+        android:layout_width="@dimen/time_slot_width"
+        android:layout_height="@dimen/time_slot_height"
+        android:layout_marginLeft="@dimen/time_slot_padding"
+        android:background="@drawable/timeslot_button_selector"
+        android:text="4-6 PM"
+        android:textColor="@color/text_color"
+        android:textSize="17sp"
+        app:fontName="Roboto_Bold" />
+
+    <com.neeru.client.views.ButtonView
+        android:id="@+id/time_68pm"
+        android:layout_width="@dimen/time_slot_width"
+        android:layout_height="@dimen/time_slot_height"
+        android:layout_marginLeft="@dimen/time_slot_padding"
+        android:background="@drawable/timeslot_button_selector"
+        android:text="6-8 PM"
+        android:textColor="@color/text_color"
+        android:textSize="17sp"
+        app:fontName="Roboto_Bold" />
+
+</LinearLayout>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_final_order">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="0dp"
+        app:cardCornerRadius="0dp"
+        app:contentPadding="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.6"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_date"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editText_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/box_height"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        android:background="@drawable/ractangle_border_black"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:padding="10dp" />
+
+
+                    <com.neeru.client.views.TimeSlotHorizontalView
+                        android:id="@+id/timeslotView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:scrollbars="none" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:background="@color/line_grey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_horizontal_margin">
+
+
+                    <com.neeru.client.views.ReaderFontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_totalCan"
+                        android:textSize="@dimen/grid_text_size"
+                        app:fontName="Roboto_Bold" />
+
+
+                    <com.neeru.client.views.CansHorizontalView
+                        android:id="@+id/quantityView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        android:scrollbars="none" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:background="@color/line_grey" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <com.neeru.client.views.ReaderFontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:text="@string/text_address"
+                        android:textSize="@dimen/grid_text_size"
+                        app:fontName="Roboto_Bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:id="@+id/address_container"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.8"
+                            android:orientation="vertical">
+
+                            <com.neeru.client.views.ReaderFontTextView
+                                android:id="@+id/text_address_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Brajendra Pandey"
+                                android:textColor="@color/textColorPrimary"
+                                android:textSize="@dimen/text_size_dynamic_s5"
+                                app:fontName="Roboto_Bold" />
+
+                            <com.neeru.client.views.ReaderFontTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="C/O-Nagesh Kumar, MIG-1B/86 Sector-9, MVP Colony, Visakhapatnam"
+                                android:textColor="@color/textColorPrimary"
+                                android:textSize="@dimen/text_size_dynamic_s5"
+                                app:fontName="Roboto_Regular" />
+                        </LinearLayout>
+
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            app:srcCompat="@drawable/ic_next" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.4"
+                android:background="@color/white_one"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="@color/line_grey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+
+                    <com.neeru.client.views.ReaderFontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_payment_method"
+                        android:textSize="@dimen/grid_text_size"
+                        app:fontName="Roboto_Regular" />
+
+
+                    <com.neeru.client.views.ReaderFontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:gravity="right"
+                        android:text="Cash On Delivery"
+                        android:textSize="@dimen/grid_text_size"
+                        app:fontName="Roboto_Regular" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/white_one"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <com.neeru.client.views.ReaderFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/text_total_amount"
+                            android:textSize="16sp"
+                            app:fontName="Klavika_Regular_Plain" />
+
+                        <com.neeru.client.views.ReaderFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:gravity="center"
+                            android:text="@string/rs"
+                            android:textColor="@color/black_overlay"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <com.neeru.client.views.ReaderFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="80"
+                            android:textColor="@color/black_overlay"
+                            android:textSize="24sp"
+                            app:fontName="Klavika_Regular_Plain" />
+                    </LinearLayout>
+
+
+                    <com.neeru.client.views.ButtonView
+                        android:id="@+id/payment"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/drawable_blue"
+                        android:text="CONFIRM"
+                        android:textColor="#F8F8F6"
+                        android:textSize="18sp"
+                        app:fontName="Klavika_Bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

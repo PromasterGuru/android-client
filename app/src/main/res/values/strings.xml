@@ -1,0 +1,124 @@
+<resources>
+    <string name="app_name">Arkraiders</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Login in to Neeru</string>
+
+
+    <string name="text_varify_number">Verify Your Number</string>
+    <string name="text_varify_description">Please enter your mobile number to recieve a verification code.</string>
+
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Registered Email ID</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Login to Neeru</string>
+    <string name="text_register">Register with Neeru</string>
+    <string name="text_continue">CONTINUE</string>
+    <string name="action_sign_in_short">Sign in</string>
+
+
+    <string name="error_empty_name">Please enter your first name</string>
+    <string name="error_empty_email">Please enter your email address</string>
+    <string name="error_empty_password">Please enter a password</string>
+    <string name="error_empty_mobile">Please enter your mobile number</string>
+    <string name="error_invalid_email">Please enter a valid email address</string>
+    <string name="error_invalid_contact">Please enter a valid mobile number</string>
+    <string name="error_invalid_password">Spaces not allowed in password</string>
+
+    <string name="text_first_name">First Name</string>
+    <string name="text_last_name">Last Name</string>
+    <string name="text_email">Email ID</string>
+    <string name="text_email_id_optional">Email ID (optional)</string>
+    <string name="create_password">Create Password</string>
+    <string name="text_mobile">Mobile</string>
+    <string name="action_register">Register</string>
+
+    <string name="terms">By logging in, you agree to Arkraiders Terms Condition and Privacy Policy</string>
+    <string name="terms_register">By registering, you agree to Arkraiders Terms Condition and Privacy Policy</string>
+    <string name="forgotpassword">Forgot Password?</string>
+
+    <string name="transition_contact_avatar">contact_avatar</string>
+    <string name="transition_contact_presence_icon">contact_presence_icon</string>
+    <string name="transition_contact_display_name">contact_display_name</string>
+
+
+    <string name="navigation_dashboard">DashBoard</string>
+    <string name="navigation_product">Product</string>
+    <string name="navigation_reports">Reports</string>
+
+
+    <string name="text_pending">Pending</string>
+    <string name="text_upcoming">Upcoming</string>
+    <string name="text_delivered">Delivered</string>
+
+
+    <string name="text_today">Today</string>
+    <string name="text_tommorow">Tommorow</string>
+    <string name="text_later">Later</string>
+    <string name="text_older">Older</string>
+    <string name="text_yesterday">Yesterday</string>
+
+    <string name="text_order_total">Order Total</string>
+    <string name="action_accept">Accept</string>
+
+    <string name="rs">\u20B9</string>
+
+
+    <string name="title_activity_product_detail">ProductDetailActivity</string>
+
+    <string name="transition_cover">product_cover</string>
+    <string name="transition_container">product_container</string>
+
+
+    <string name="text_overview">OVERVIEW</string>
+    <string name="text_reviews">REVIEWS</string>
+
+
+    <string name="text_highlights">Highlights</string>
+
+    <string name="text_book">BOOK A CAN</string>
+    <string name="text_website">WEBSITE</string>
+    <string name="text_rating">RATING</string>
+    <string name="text_share">SHARE</string>
+
+
+    <string name="text_date">Date &#38; slot</string>
+    <string name="text_totalCan">How Many Cans ?</string>
+    <string name="text_address">Shipping Address</string>
+    <string name="text_payment_method">Payment Mode   -</string>
+
+    <string name="text_bulk">BULK ORDER</string>
+    <string name="text_verification_header">Verification Code</string>
+    <string name="text_verification_content">Please type the verification code sent \n to </string>
+
+
+    <string name="quickstart_message">Click the SUBSCRIBE TO NEWS button below to subscribe to the
+        news topic. Messages sent to the news topic will be received. The LOG TOKEN button logs the
+        InstanceID token to logcat.</string>
+    <string name="subscribe_to_news">Subscribe To News</string>
+    <string name="log_token">Log Token</string>
+
+    <string name="msg_subscribed">Subscribed to news topic</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <!--
+        This is the name that users will see when interacting with this channel.
+        It should describe the category of notifications that will be sent through this channel
+     -->
+    <string name="default_notification_channel_name" translatable="true">News</string>
+
+    <string name="title_activity_location">LocationActivity</string>
+    <string name="text_location">Select Location</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="text_total_amount">TOTAL</string>
+
+
+</resources>

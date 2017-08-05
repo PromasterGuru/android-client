@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/place_search_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/white_one"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:id="@+id/place_search_dialog_header_image_IV"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:src="@drawable/place_picker_dialog" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin">
+
+
+            <EditText
+                android:id="@+id/editText_date"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/box_height"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:background="@drawable/ractangle_border_black"
+                android:drawableRight="@drawable/ic_arrow_drop_down"
+                android:editable="false"
+                android:focusable="false"
+                android:padding="10dp"
+                android:text="Visakhapatnam" />
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/box_height"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:background="@drawable/ractangle_border_black"
+                android:paddingRight="13dp">
+
+                <Spinner
+                    android:id="@+id/spinner_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:prompt="@string/text_location"
+                    android:spinnerMode="dropdown" />
+
+            </FrameLayout>
+
+            <com.dd.CircularProgressButton
+                android:id="@+id/circularButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:textColor="@color/cpb_white"
+                android:textSize="20sp"
+                app:cpb_cornerRadius="48dp"
+                app:cpb_textIdle="@string/text_continue" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

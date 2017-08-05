@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context="com.neeru.client.OTPVarificationActivity">
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?actionBarSize"
+        android:orientation="vertical">
+
+        <com.neeru.client.views.ReaderFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/text_verification_header"
+            android:textColor="@color/white_one"
+            android:textSize="32dp"
+            app:fontName="Klavika_Bold" />
+
+        <com.neeru.client.views.ReaderFontTextView
+            android:id="@+id/text_mobiledesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:gravity="center"
+            android:text="@string/text_verification_content"
+            android:textColor="#f8f8f6"
+            android:textSize="@dimen/text_size_dynamic_s5"
+            app:fontName="Klavika_Regular_Plain" />
+
+
+        <com.neeru.client.views.PinEntryView
+            android:id="@+id/pinview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            app:digitBackground="@drawable/otp_box_background"
+            app:digitTextColor="#f8f8f6"
+            app:digitTextSize="30dp"
+            app:mask="" />
+
+
+    </LinearLayout>
+
+    <android.inputmethodservice.KeyboardView
+        android:id="@+id/keyboard_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_above="@+id/relativeAd"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:keyBackground="@android:color/transparent"
+        android:keyTextColor="#F8F8F6"
+        android:keyTextSize="32sp"
+        android:visibility="visible" />
+
+
+</FrameLayout>

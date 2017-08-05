@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="170dp"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/my_presence_bg_bitmap"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="3.0dip">
+
+    <com.neeru.client.views.AvatarImageView
+        android:id="@+id/drawer_header_profilePic"
+        android:layout_width="70.0dip"
+        android:layout_height="70.0dip"
+        android:layout_marginLeft="@dimen/presence_avatar_margin_left"
+        android:layout_marginTop="10.0dip"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_avatar_default" />
+
+    <TextView
+        android:id="@+id/menu_item_self_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:text="Brajendra Pandey"
+        android:textColor="@color/white_1"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_dynamic_s5" />
+
+</LinearLayout>
