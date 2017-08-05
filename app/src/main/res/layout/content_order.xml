@@ -240,10 +240,11 @@
                             android:textStyle="bold" />
 
                         <com.neeru.client.views.ReaderFontTextView
+                            android:id="@+id/text_price"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="80"
+                            android:text="0"
                             android:textColor="@color/black_overlay"
                             android:textSize="24sp"
                             app:fontName="Klavika_Regular_Plain" />

@@ -13,12 +13,14 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.dd.CircularProgressButton;
 import com.neeru.client.models.User;
+import com.neeru.client.network.JsonRequestHandler;
 import com.neeru.client.network.NetworkHandler;
 import com.neeru.client.util.Constants;
 
@@ -86,8 +88,9 @@ public class RegisterationActivity extends BaseActivity implements View.OnClickL
             mCircularButton.setIndeterminateProgressMode(true);
             mCircularButton.setProgress(50);
 
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.POST, url, null, this, this);
+            JsonRequestHandler jsObjRequest = new JsonRequestHandler
+                    (Request.Method.POST, url, null, this, this,null);
+
 
             NetworkHandler.getInstance(this).addToRequestQueue(jsObjRequest);
 

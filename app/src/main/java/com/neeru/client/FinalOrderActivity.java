@@ -6,49 +6,83 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Transition;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.neeru.client.callbacks.OrderActionListener;
+import com.neeru.client.models.Address;
+import com.neeru.client.models.Product;
+import com.neeru.client.network.JsonRequestHandler;
+import com.neeru.client.network.NetworkHandler;
+import com.neeru.client.prefs.AuthPreference;
+import com.neeru.client.util.Constants;
+import com.neeru.client.util.DialogHelper;
 import com.neeru.client.util.Util;
 import com.neeru.client.views.CansHorizontalView;
 import com.neeru.client.views.TimeSlotHorizontalView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.neeru.client.LocationActivity.INTENT_EXTRA_LOCATION;
 import static com.neeru.client.fragment.ProductFragment.INTENT_EXTRA_PRODUCT;
 
-public class FinalOrderActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, OrderActionListener {
+public class FinalOrderActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, OrderActionListener, Response.Listener<JSONObject>, Response.ErrorListener {
 
 
-    public static final String INTENT_EXTRA_SELLER = "intent_seller";
     private EditText mEditTextDate;
 
 
     private Calendar calender;
 
 
-    private int productId;
-    private int sellerId;
     private int locationId;
 
     private int time;
     private int quantity;
     private TimeSlotHorizontalView mTimeSlot;
+    private View mRoot;
+    private Product product;
+    private Address mAddress;
+    private TextView mPrice;
+    private AuthPreference mAuthPref;
+    private View mPayment;
+    boolean isSlotAvilable;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        VolleyLog.DEBUG = true;
+        mAuthPref = new AuthPreference(getApplicationContext());
+
+        mAddress = new Address();
+        mAddress.line1 = "MVP Sector 8";
+        mAddress.line2 = "";
+        mAddress.landMark = "Satya sai vidya vihar";
 
         locationId = getIntent().getIntExtra(INTENT_EXTRA_LOCATION, -1);
-        sellerId = getIntent().getIntExtra(INTENT_EXTRA_SELLER, -1);
-        productId = getIntent().getIntExtra(INTENT_EXTRA_PRODUCT, -1);
+        product = getIntent().getParcelableExtra(INTENT_EXTRA_PRODUCT);
 
 
         setContentView(R.layout.activity_final_order);
+
+
+        mRoot = findViewById(R.id.root_layout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -68,14 +102,21 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
 
         mEditTextDate.setText(Util.formatDate(calender));
 
-        findViewById(R.id.payment).setOnClickListener(this);
+
+        mPayment = findViewById(R.id.payment);
+        mPayment.setOnClickListener(this);
+
+
         mTimeSlot = (TimeSlotHorizontalView) findViewById(R.id.timeslotView);
+        mTimeSlot.setActionListener(this);
         mTimeSlot.setCalender(calender);
 
         CansHorizontalView mQuantityView = (CansHorizontalView) findViewById(R.id.quantityView);
 
-        mTimeSlot.setActionListener(this);
+
         mQuantityView.setActionListener(this);
+
+        mPrice = (TextView) findViewById(R.id.text_price);
 
     }
 
@@ -98,7 +139,12 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
                 break;
 
             case R.id.payment:
-                payment();
+
+                try {
+                    payment();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 break;
 
         }
@@ -111,22 +157,110 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
 
         mEditTextDate.setText(Util.formatDate(calender));
 
+        mTimeSlot.updateView();
+
 
     }
 
 
-    void payment() {
+    DialogHelper dialogHelper = new DialogHelper();
 
+
+    void payment() throws Exception {
+
+
+        if (validation()) {
+
+
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("slot", time);
+            jsonObject.put("address", mAddress.line1 + mAddress.line2);
+            jsonObject.put("paymentMethod", "COD");
+            jsonObject.put("totalPrice", product.price * quantity);
+            jsonObject.put("locationId", locationId);
+            jsonObject.put("landmark", mAddress.landMark);
+
+            JSONArray itemsArray = new JSONArray();
+
+            JSONObject itmObject = new JSONObject();
+            itmObject.put("productId", product.id);
+            itmObject.put("sellerId", product.seller.id);
+            itmObject.put("quantity", quantity);
+            itmObject.put("price", product.price);
+
+            itemsArray.put(itmObject);
+
+            jsonObject.put("items", itemsArray);
+            jsonObject.put("expectedDeliveryDate", calender.get(Calendar.YEAR) + "-" + (calender.get(Calendar.MONTH) + 1) + "-" + calender.get(Calendar.DAY_OF_MONTH));
+
+
+            String url = Constants.URL + "inventory/v1/order";
+
+
+            Map<String, String> headers = new HashMap<>();
+            headers.put("authorization", "Bearer " + mAuthPref.getAccessTocken());
+
+
+            dialogHelper.showProgressDialog(this,"Ordering...");
+
+            JsonRequestHandler jsObjRequest = new JsonRequestHandler(Request.Method.POST, url, jsonObject, this, this, headers);
+
+            NetworkHandler.getInstance(this).addToRequestQueue(jsObjRequest);
+        }
+
+
+    }
+
+    boolean validation() {
+
+
+        if (!isSlotAvilable) {
+            dialogHelper.showSnackBar("Please select other date.", mRoot);
+            return false;
+        } else if (time <= 0) {
+            dialogHelper.showSnackBar("Please select time slot.", mRoot);
+            return false;
+        } else if (quantity <= 0) {
+            dialogHelper.showSnackBar("Please select at least one Can.", mRoot);
+            return false;
+        }
+
+
+        return true;
+    }
+
+    @Override
+    public void onTimeSlotSelection(int time) {
+
+        this.time = time;
+    }
+
+
+    @Override
+    public void onCanSelected(int quantity) {
+        this.quantity = quantity;
+
+
+        mPrice.setText("" + (quantity * product.price));
 
     }
 
     @Override
-    public void onTimeSlotSelection(String time) {
-
+    public void onSlotAvailable(boolean isSlotAvilable) {
+        this.isSlotAvilable = isSlotAvilable;
     }
 
     @Override
-    public void onCanSelected(String time) {
+    public void onErrorResponse(VolleyError error) {
+        dialogHelper.hideProgressDialog();
+        dialogHelper.showSnackBar("Error Placing order", mRoot);
+    }
 
+    @Override
+    public void onResponse(JSONObject response) {
+        dialogHelper.hideProgressDialog();
+
+        Log.v("Error--------", "");
     }
 }

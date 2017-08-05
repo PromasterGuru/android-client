@@ -6,6 +6,9 @@ package com.neeru.client.callbacks;
 
 public interface OrderActionListener {
 
-    void onTimeSlotSelection(String time);
-    void onCanSelected(String time);
+    void onTimeSlotSelection(int time);
+
+    void onCanSelected(int quantity);
+
+    void onSlotAvailable(boolean isSlotAvilable);
 }

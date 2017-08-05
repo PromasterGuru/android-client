@@ -120,5 +120,5 @@
 
     <string name="text_total_amount">TOTAL</string>
 
-
+    <string name="text_empty_time">We are not serving same day after 8PM,\n Please select other date.</string>
 </resources>

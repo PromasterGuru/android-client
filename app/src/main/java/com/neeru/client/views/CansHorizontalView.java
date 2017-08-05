@@ -56,7 +56,7 @@ public class CansHorizontalView extends HorizontalScrollView implements View.OnC
     }
 
 
-    void clearSelectionCan() {
+    void clearSelectionCan(View v, int quality) {
         mView.findViewById(R.id.can_1).setSelected(false);
         mView.findViewById(R.id.can_2).setSelected(false);
         mView.findViewById(R.id.can_3).setSelected(false);
@@ -68,24 +68,52 @@ public class CansHorizontalView extends HorizontalScrollView implements View.OnC
         mView.findViewById(R.id.can_9).setSelected(false);
         mView.findViewById(R.id.can_10).setSelected(false);
 
+
+        v.setSelected(true);
+
+        if (listener != null) {
+            listener.onCanSelected(quality);
+        }
+
+
     }
 
     @Override
     public void onClick(View v) {
 
+        int can = 0;
         switch (v.getId()) {
             case R.id.can_1:
+                clearSelectionCan(v, 1);
+
+                break;
             case R.id.can_2:
+                clearSelectionCan(v, 2);
+
+                break;
             case R.id.can_3:
+                clearSelectionCan(v, 3);
+                break;
             case R.id.can_4:
+                clearSelectionCan(v, 4);
+                break;
             case R.id.can_5:
+                clearSelectionCan(v, 5);
+                break;
             case R.id.can_6:
+                clearSelectionCan(v, 6);
+                break;
             case R.id.can_7:
+                clearSelectionCan(v, 7);
+                break;
             case R.id.can_8:
+                clearSelectionCan(v, 8);
+                break;
             case R.id.can_9:
+                clearSelectionCan(v, 9);
+                break;
             case R.id.can_10:
-                clearSelectionCan();
-                v.setSelected(true);
+                clearSelectionCan(v, 10);
                 break;
         }
     }

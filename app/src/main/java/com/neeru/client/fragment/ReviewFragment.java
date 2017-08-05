@@ -100,7 +100,7 @@ public class ReviewFragment extends Fragment implements Response.Listener<Review
     void init() {
 
 
-        String url = Constants.URL + "inventory/v1/review/all?productId=" + productID;
+        String url = Constants.URL + "inventory/v1/review?productId=" + productID;
 
 
         Type tc = new TypeToken<ArrayList<Product>>() {
