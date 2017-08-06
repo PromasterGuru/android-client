@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.neeru.client.fragment.SuccessDialogFragment;
 import com.neeru.client.prefs.AuthPreference;
 
 public class SplashActivity extends BaseActivity implements Animation.AnimationListener {
@@ -35,6 +36,7 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
 
         animSlide.setAnimationListener(this);
         tvName.startAnimation(animSlide);
+
 
 
     }
@@ -79,11 +81,11 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
 
         AuthPreference mPrefs = new AuthPreference(getApplicationContext());
 
-        if(mPrefs.getAccessTocken() == null){
+        if (mPrefs.getAccessTocken() == null) {
             Intent intent = new Intent(SplashActivity.this, RegisterationActivity.class);
             startActivity(intent);
 
-        }else{
+        } else {
             Intent intent = new Intent(SplashActivity.this, LocationActivity.class);
             startActivity(intent);
         }

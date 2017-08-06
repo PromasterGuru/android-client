@@ -30,4 +30,6 @@
     <color name="mt_red">#FF3366</color>
     <color name="mt_gray4">#8E959E</color>
     <color name="date_grey">#C0C5C4</color>
+    <color name="color_apple">#71C341</color>
+
 </resources>

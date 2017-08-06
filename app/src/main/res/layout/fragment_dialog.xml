@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_layoutDialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent">
+
+
+        <LinearLayout
+            android:id="@+id/id_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/rounded_white"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center|top"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/layout_ok"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:background="@drawable/circle_success_apple"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_done" />
+            </FrameLayout>
+        </FrameLayout>
+
+
+    </FrameLayout>
+
+
+</FrameLayout>

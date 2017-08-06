@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.neeru.client.models.Location;
 import com.neeru.client.network.GsonRequest;
+import com.neeru.client.network.JsonRequestHandler;
 import com.neeru.client.network.NetworkHandler;
 import com.neeru.client.util.Constants;
 
@@ -38,6 +39,7 @@ public class LocationActivity extends AppCompatActivity implements Response.List
     public static String INTENT_EXTRA_LOCATION = "intent_location";
 
     private Spinner mSpinner;
+    private JsonRequestHandler jsObjRequest;
 
 
     @Override
@@ -60,7 +62,7 @@ public class LocationActivity extends AppCompatActivity implements Response.List
         String url = url = Constants.URL + "inventory/v1/location";
 
 
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+        jsObjRequest = new JsonRequestHandler(Request.Method.GET, url, null, this, this, null);
         NetworkHandler.getInstance(this).addToRequestQueue(jsObjRequest);
 
 
@@ -102,7 +104,7 @@ public class LocationActivity extends AppCompatActivity implements Response.List
 
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra(INTENT_EXTRA_LOCATION,location);
+        intent.putExtra(INTENT_EXTRA_LOCATION, location);
         startActivity(intent);
     }
 }

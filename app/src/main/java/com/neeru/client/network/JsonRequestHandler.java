@@ -1,8 +1,14 @@
 package com.neeru.client.network;
 
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
@@ -26,6 +32,8 @@ public class JsonRequestHandler extends JsonObjectRequest {
 
     public JsonRequestHandler(String url, JSONObject jsonRequest, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
         super(url, jsonRequest, listener, errorListener);
+
+
     }
 
 
@@ -34,5 +42,20 @@ public class JsonRequestHandler extends JsonObjectRequest {
         if (header != null)
             return header;
         return super.getHeaders();
+    }
+
+
+    @Override
+    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+
+        try{
+            String jsonString = new String(response.data,
+                    HttpHeaderParser.parseCharset(response.headers));
+            Log.v("RESPONCE", jsonString);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        return super.parseNetworkResponse(response);
     }
 }

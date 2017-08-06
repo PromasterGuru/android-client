@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,10 +20,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.neeru.client.callbacks.OTPListener;
 import com.neeru.client.models.User;
 import com.neeru.client.network.GsonRequest;
+import com.neeru.client.network.JsonRequestHandler;
 import com.neeru.client.network.NetworkHandler;
 import com.neeru.client.prefs.AuthPreference;
 import com.neeru.client.receiver.OtpReader;
@@ -54,6 +58,10 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpvarification);
         VolleyLog.DEBUG = true;
+        VolleyLog.setTag("Volley");
+        Log.isLoggable("Volley", Log.VERBOSE);
+
+
         otp = getIntent().getStringExtra(INTENT_EXTRA_OTP);
         mobile = getIntent().getStringExtra(INTENT_EXTRA_MOBILE);
         operation = getIntent().getStringExtra(INTENT_EXTRA_OPERATION);
@@ -157,12 +165,15 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
 
             jsonObject.put("contact", mobile);
             jsonObject.put("otp", Integer.parseInt(otp));
+            jsonObject.put("deviceId", Settings.Secure.getString(getApplication().getContentResolver(),
+                    Settings.Secure.ANDROID_ID));
+            jsonObject.put("token",  FirebaseInstanceId.getInstance().getToken());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
 
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, this, this);
+        JsonRequestHandler jsObjRequest = new JsonRequestHandler(Request.Method.POST, url, jsonObject, this, this, null);
 
         NetworkHandler.getInstance(this).addToRequestQueue(jsObjRequest);
 
