@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.neeru.client.callbacks.OrderActionListener;
+import com.neeru.client.fragment.SuccessDialogFragment;
 import com.neeru.client.models.Address;
 import com.neeru.client.models.Product;
 import com.neeru.client.network.JsonRequestHandler;
@@ -202,7 +203,7 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
             headers.put("authorization", "Bearer " + mAuthPref.getAccessTocken());
 
 
-            dialogHelper.showProgressDialog(this,"Ordering...");
+            dialogHelper.showProgressDialog(this, "Ordering...");
 
             JsonRequestHandler jsObjRequest = new JsonRequestHandler(Request.Method.POST, url, jsonObject, this, this, headers);
 
@@ -261,6 +262,8 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
     public void onResponse(JSONObject response) {
         dialogHelper.hideProgressDialog();
 
-        Log.v("Error--------", "");
+        SuccessDialogFragment mDialog = SuccessDialogFragment.newInstance();
+
+        mDialog.show(getSupportFragmentManager(), "Success Dialog");
     }
 }

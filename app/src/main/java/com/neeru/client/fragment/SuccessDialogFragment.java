@@ -3,6 +3,7 @@ package com.neeru.client.fragment;
 
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.transition.Transition;
@@ -17,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.neeru.client.OrderActivity;
 import com.neeru.client.R;
 import com.neeru.client.anim.BounceInterpolator;
 
@@ -67,9 +69,21 @@ public class SuccessDialogFragment extends DialogFragment {
 
 
         mCard.setMinimumWidth((int) (displayRectangle.width() * 0.9f));
-        mCard.setMinimumHeight((int) (displayRectangle.height() * 0.5f));
+        //  mCard.setMinimumHeight((int) (displayRectangle.height() * 0.5f));
 
 
+        mRoot.findViewById(R.id.go_to).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                getActivity().startActivity(intent);
+
+                getActivity().finish();
+
+                dismiss();
+            }
+        });
         return mRoot;
     }
 
@@ -78,6 +92,9 @@ public class SuccessDialogFragment extends DialogFragment {
         super.onActivityCreated(arg0);
         getDialog().getWindow()
                 .getAttributes().windowAnimations = R.style.DialogAnimation;
+
+        getDialog().setCanceledOnTouchOutside(false);
+        getDialog().setCancelable(false);
 
 
         final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.bounce);

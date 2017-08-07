@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -36,7 +37,6 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
 
         animSlide.setAnimationListener(this);
         tvName.startAnimation(animSlide);
-
 
 
     }

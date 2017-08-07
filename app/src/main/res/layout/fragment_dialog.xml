@@ -19,7 +19,33 @@
             android:layout_height="match_parent"
             android:layout_marginTop="60dp"
             android:background="@drawable/rounded_white"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin">
+
+
+            <com.neeru.client.views.ReaderFontTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:text="Your order has been placed successfully, an email and message has been sent to your email id and phone number respectively."
+                android:textSize="16sp"
+                app:fontName="Roboto_Regular" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/activity_horizontal_margin">
+
+                <com.neeru.client.views.ButtonView
+                    android:id="@+id/go_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:background="@color/colorBluelight"
+                    android:text="Go to Order"
+                    android:textColor="@color/white_one" />
+
+            </FrameLayout>
 
 
         </LinearLayout>
@@ -32,8 +58,8 @@
 
             <FrameLayout
                 android:id="@+id/layout_ok"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center|top"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:background="@drawable/circle_success_apple"

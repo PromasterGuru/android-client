@@ -17,11 +17,12 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,15 +43,19 @@
             android:name=".OTPVarificationActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".LocationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_location"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity android:name=".NotificationActivity" />
 
 
-        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".OrderActivity"
+            android:label="@string/title_order">
+
+        </activity>
+
 
         <receiver android:name=".receiver.OtpReader">
             <intent-filter>
