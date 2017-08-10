@@ -23,11 +23,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <activity
             android:name=".RegisterationActivity"
@@ -35,10 +35,20 @@
         <activity
             android:name=".ProductDetailActivity"
             android:label="@string/title_activity_product_detail"
-            android:theme="@style/AppThemeProductDetail" />
+            android:parentActivityName="com.neeru.client.MainActivity"
+            android:theme="@style/AppThemeProductDetail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.neeru.client.MainActivity" />
+        </activity>
         <activity
             android:name=".FinalOrderActivity"
-            android:theme="@style/FinalOrderTheme" />
+            android:parentActivityName="com.neeru.client.ProductDetailActivity"
+            android:theme="@style/FinalOrderTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.neeru.client.ProductDetailActivity" />
+        </activity>
         <activity
             android:name=".OTPVarificationActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
@@ -51,7 +61,8 @@
         <activity android:name=".NotificationActivity" />
 
 
-        <activity android:name=".OrderActivity"
+        <activity
+            android:name=".OrderActivity"
             android:label="@string/title_order">
 
         </activity>

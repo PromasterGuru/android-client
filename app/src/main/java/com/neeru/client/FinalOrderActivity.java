@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Transition;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -200,7 +201,7 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
 
 
             Map<String, String> headers = new HashMap<>();
-            headers.put("authorization", "Bearer " + mAuthPref.getAccessTocken());
+            headers.put("authorization", "Bearer "+ mAuthPref.getAccessTocken());
 
 
             dialogHelper.showProgressDialog(this, "Ordering...");
@@ -265,5 +266,17 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
         SuccessDialogFragment mDialog = SuccessDialogFragment.newInstance();
 
         mDialog.show(getSupportFragmentManager(), "Success Dialog");
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                supportFinishAfterTransition();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

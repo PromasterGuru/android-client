@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
 import com.neeru.client.fragment.ProductFragment;
 import com.neeru.client.models.Location;
@@ -30,10 +31,11 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.activity_main);
 
 
-        location = (Location) getIntent().getParcelableExtra(INTENT_EXTRA_LOCATION);
+        location =  getIntent().getParcelableExtra(INTENT_EXTRA_LOCATION);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

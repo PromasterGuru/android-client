@@ -37,7 +37,7 @@ public class AuthPreference {
         }
 
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(KEY_TOKEN, user.accessToken);
+        editor.putString(KEY_TOKEN, "Bearer "+user.accessToken);
         editor.putString(KEY_MOBILE, user.contact);
         editor.putString(KEY_EMAIL, user.email);
         editor.putString(KEY_FNAME, user.firstName);

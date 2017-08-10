@@ -16,10 +16,10 @@ import java.util.Date;
  */
 
 public class Constants {
-    public static final String ISO_DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
+    public static final String ISO_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     public static SimpleDateFormat formatter = new SimpleDateFormat(ISO_DATE_FORMAT);
     public static SimpleDateFormat formatterDate = new SimpleDateFormat("dd-MMM");
-
+    public static SimpleDateFormat formatterOrderDate = new SimpleDateFormat("dd MMM yyyy HH:MM a");
     public static final String URL = "https://api.arkraiders.in/";
 
 
