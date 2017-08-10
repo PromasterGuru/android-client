@@ -12,6 +12,8 @@ import android.text.TextUtils;
 
 import com.neeru.client.callbacks.OTPListener;
 
+import java.util.List;
+
 
 /**
  * Created by brajendra on 29/07/17.
@@ -32,7 +34,7 @@ public class OtpReader extends BroadcastReceiver {
     /**
      * The Sender number string.
      */
-    private static String receiverString;
+    private static List<String> receiverString;
 
     /**
      * Binds the sender string and listener for callback.
@@ -40,7 +42,9 @@ public class OtpReader extends BroadcastReceiver {
      * @param listener
      * @param sender
      */
-    public static void bind(OTPListener listener, String sender) {
+
+
+    public static void bind(OTPListener listener, List<String> sender) {
         otpListener = listener;
         receiverString = sender;
     }
@@ -66,13 +70,19 @@ public class OtpReader extends BroadcastReceiver {
                 String message = currentMessage.getDisplayMessageBody();
                 Log.i(TAG, "senderNum: " + senderNum + " message: " + message);
 
-                if (!TextUtils.isEmpty(receiverString) && senderNum.contains(receiverString)) { //If message received is from required number.
-                    //If bound a listener interface, callback the overriden method.
-                    if (otpListener != null) {
-                        otpListener.otpReceived(message);
+                for (String str : receiverString) {
+                    if (!TextUtils.isEmpty(str) && senderNum.contains(str)) { //If message received is from required number.
+                        //If bound a listener interface, callback the overriden method.
+                        if (otpListener != null) {
+                            otpListener.otpReceived(message);
+                        }
+
+                        break;
                     }
                 }
             }
+
+
         }
     }
 }

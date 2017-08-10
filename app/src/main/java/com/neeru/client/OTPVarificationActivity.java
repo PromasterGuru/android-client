@@ -37,7 +37,9 @@ import com.neeru.client.views.ReaderFontTextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -71,7 +73,11 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
         mOTPView = (PinEntryView) findViewById(R.id.pinview);
         mOTPView.setOnPinEnteredListener(this);
 
-        OtpReader.bind(this, "AM-NOTIFY");
+        List<String>  mList = new ArrayList<>();
+        mList.add("AM-NOTIFY");
+        mList.add("HP-PLVSMS");
+
+        OtpReader.bind(this,mList );
         keyboarsetUP();
 
         View v = findViewById(R.id.mRoot);
