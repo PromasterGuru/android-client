@@ -201,7 +201,7 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
 
 
             Map<String, String> headers = new HashMap<>();
-            headers.put("authorization", "Bearer "+ mAuthPref.getAccessTocken());
+            headers.put("authorization",  mAuthPref.getAccessTocken());
 
 
             dialogHelper.showProgressDialog(this, "Ordering...");

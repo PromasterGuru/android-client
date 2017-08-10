@@ -59,7 +59,7 @@ public class OrderActivity extends AppCompatActivity implements Response.Listene
         AuthPreference mPrefs = new AuthPreference(getApplicationContext());
         Map headers = new HashMap<String, String>();
 
-        headers.put("authorization", "Bearer " + mPrefs.getAccessTocken());
+        headers.put("authorization", mPrefs.getAccessTocken());
 
         jsObjRequest = new JsonRequestHandler(Request.Method.GET, url, null, this, this, headers);
         NetworkHandler.getInstance(this).addToRequestQueue(jsObjRequest);
