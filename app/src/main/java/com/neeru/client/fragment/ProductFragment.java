@@ -24,7 +24,9 @@ import com.neeru.client.callbacks.OnViewItemClick;
 import com.neeru.client.holder.ProductHolder;
 import com.neeru.client.models.Product;
 import com.neeru.client.network.GsonRequest;
+import com.neeru.client.network.JsonRequestHandler;
 import com.neeru.client.network.NetworkHandler;
+import com.neeru.client.prefs.AuthPreference;
 import com.neeru.client.util.Constants;
 import com.neeru.client.views.EmptyRecyclerView;
 
@@ -104,7 +106,7 @@ public class ProductFragment extends Fragment implements OnViewItemClick, Respon
         Type tc = new TypeToken<ArrayList<Product>>() {
         }.getType();
 
-        GsonRequest<Product[]> request = new GsonRequest(url, Product[].class, null, this, this);
+        GsonRequest<Product[]> request = new GsonRequest(url, Product[].class, JsonRequestHandler.getHeader(getActivity()), this, this);
         NetworkHandler.getInstance(getActivity()).addToRequestQueue(request);
     }
 
@@ -124,7 +126,7 @@ public class ProductFragment extends Fragment implements OnViewItemClick, Respon
 
         Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
         intent.putExtra(INTENT_EXTRA_PRODUCT, product);
-        intent.putExtra(INTENT_EXTRA_LOCATION,locationID);
+        intent.putExtra(INTENT_EXTRA_LOCATION, locationID);
 
         Pair<View, String> p1 = Pair.create((View) holder.ivCover, getActivity().getString(R.string.transition_cover));
         Pair<View, String> p2 = Pair.create((View) holder.mContainer, getActivity().getString(R.string.transition_container));

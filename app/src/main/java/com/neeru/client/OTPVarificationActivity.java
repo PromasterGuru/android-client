@@ -1,7 +1,11 @@
 package com.neeru.client;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.provider.Settings;
@@ -40,12 +44,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.neeru.client.RegisterationActivity.INTENT_EXTRA_MOBILE;
 import static com.neeru.client.RegisterationActivity.INTENT_EXTRA_OPERATION;
 import static com.neeru.client.RegisterationActivity.INTENT_EXTRA_OTP;
+import static com.neeru.client.network.JsonRequestHandler.HEADER_DEVICE_ID;
 
 public class OTPVarificationActivity extends AppCompatActivity implements OTPListener, Response.Listener<JSONObject>, Response.ErrorListener, PinEntryView.OnPinEnteredListener {
 
@@ -73,11 +79,11 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
         mOTPView = (PinEntryView) findViewById(R.id.pinview);
         mOTPView.setOnPinEnteredListener(this);
 
-        List<String>  mList = new ArrayList<>();
+        List<String> mList = new ArrayList<>();
         mList.add("AM-NOTIFY");
         mList.add("HP-PLVSMS");
 
-        OtpReader.bind(this,mList );
+        OtpReader.bind(this, mList);
         keyboarsetUP();
 
         View v = findViewById(R.id.mRoot);
@@ -173,13 +179,13 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
             jsonObject.put("otp", Integer.parseInt(otp));
             jsonObject.put("deviceId", Settings.Secure.getString(getApplication().getContentResolver(),
                     Settings.Secure.ANDROID_ID));
-            jsonObject.put("token",  FirebaseInstanceId.getInstance().getToken());
+            jsonObject.put("token", FirebaseInstanceId.getInstance().getToken());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
 
-        JsonRequestHandler jsObjRequest = new JsonRequestHandler(Request.Method.POST, url, jsonObject, this, this, null);
+        JsonRequestHandler jsObjRequest = new JsonRequestHandler(Request.Method.POST, url, jsonObject, this, this, JsonRequestHandler.getFirebaseHeader(this));
 
         NetworkHandler.getInstance(this).addToRequestQueue(jsObjRequest);
 
@@ -220,4 +226,31 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
 
 
     }
+
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+
+        try {
+            unregisterReceiverFromManifest(OtpReader.class, this);
+
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    private void unregisterReceiverFromManifest(Class<? extends BroadcastReceiver> clazz, final Context context) {
+        final ComponentName component = new ComponentName(context, clazz);
+        final int status = context.getPackageManager().getComponentEnabledSetting(component);
+        if (status == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+            context.getPackageManager()
+                    .setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                            PackageManager.DONT_KILL_APP);
+        }
+    }
+
 }
+
+

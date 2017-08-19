@@ -18,7 +18,7 @@
 
 
     <com.neeru.client.views.ButtonView
-        android:id="@+id/time_68am"
+        android:id="@+id/time_810am"
         android:layout_width="@dimen/time_slot_width"
         android:layout_height="@dimen/time_slot_height"
         android:background="@drawable/timeslot_button_selector"

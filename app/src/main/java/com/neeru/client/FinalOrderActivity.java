@@ -1,6 +1,10 @@
 package com.neeru.client;
 
 import android.app.DatePickerDialog;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +31,7 @@ import com.neeru.client.models.Product;
 import com.neeru.client.network.JsonRequestHandler;
 import com.neeru.client.network.NetworkHandler;
 import com.neeru.client.prefs.AuthPreference;
+import com.neeru.client.receiver.OtpReader;
 import com.neeru.client.util.Constants;
 import com.neeru.client.util.DialogHelper;
 import com.neeru.client.util.Util;
@@ -200,13 +205,9 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
             String url = Constants.URL + "inventory/v1/order";
 
 
-            Map<String, String> headers = new HashMap<>();
-            headers.put("authorization",  mAuthPref.getAccessTocken());
-
-
             dialogHelper.showProgressDialog(this, "Ordering...");
 
-            JsonRequestHandler jsObjRequest = new JsonRequestHandler(Request.Method.POST, url, jsonObject, this, this, headers);
+            JsonRequestHandler jsObjRequest = new JsonRequestHandler(Request.Method.POST, url, jsonObject, this, this, JsonRequestHandler.getHeader(this));
 
             NetworkHandler.getInstance(this).addToRequestQueue(jsObjRequest);
         }
@@ -279,4 +280,6 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

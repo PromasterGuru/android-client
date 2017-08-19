@@ -50,7 +50,7 @@ public class TimeSlotHorizontalView extends HorizontalScrollView implements View
         tvEmpty = (TextView) mView.findViewById(R.id.time);
 
 
-        mView.findViewById(R.id.time_68am).setOnClickListener(this);
+        mView.findViewById(R.id.time_810am).setOnClickListener(this);
         mView.findViewById(R.id.time_1012am).setOnClickListener(this);
         mView.findViewById(R.id.time_24pm).setOnClickListener(this);
         mView.findViewById(R.id.time_46pm).setOnClickListener(this);
@@ -64,12 +64,12 @@ public class TimeSlotHorizontalView extends HorizontalScrollView implements View
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.time_68am:
+            case R.id.time_810am:
                 clearSelectionTimeSlot();
                 v.setSelected(true);
 
                 if(listener !=null){
-                    listener.onTimeSlotSelection(6);
+                    listener.onTimeSlotSelection(8);
                 }
                 break;
             case R.id.time_1012am:
@@ -109,7 +109,7 @@ public class TimeSlotHorizontalView extends HorizontalScrollView implements View
 
 
     void clearSelectionTimeSlot() {
-        mView.findViewById(R.id.time_68am).setSelected(false);
+        mView.findViewById(R.id.time_810am).setSelected(false);
         mView.findViewById(R.id.time_1012am).setSelected(false);
         mView.findViewById(R.id.time_24pm).setSelected(false);
         mView.findViewById(R.id.time_46pm).setSelected(false);
@@ -149,25 +149,25 @@ public class TimeSlotHorizontalView extends HorizontalScrollView implements View
 
     void remove(int hour) {
         if (hour >= 10 && hour < 12) {
-            mView.findViewById(R.id.time_68am).setVisibility(GONE);
+            mView.findViewById(R.id.time_810am).setVisibility(GONE);
             listener.onSlotAvailable(true);
         } else if (hour >= 12 && hour < 16) {
-            mView.findViewById(R.id.time_68am).setVisibility(GONE);
+            mView.findViewById(R.id.time_810am).setVisibility(GONE);
             mView.findViewById(R.id.time_1012am).setVisibility(GONE);
             listener.onSlotAvailable(true);
         } else if (hour >= 16 && hour < 18) {
-            mView.findViewById(R.id.time_68am).setVisibility(GONE);
+            mView.findViewById(R.id.time_810am).setVisibility(GONE);
             mView.findViewById(R.id.time_1012am).setVisibility(GONE);
             mView.findViewById(R.id.time_24pm).setVisibility(GONE);
             listener.onSlotAvailable(true);
         } else if (hour >= 18 && hour <= 20) {
-            mView.findViewById(R.id.time_68am).setVisibility(GONE);
+            mView.findViewById(R.id.time_810am).setVisibility(GONE);
             mView.findViewById(R.id.time_1012am).setVisibility(GONE);
             mView.findViewById(R.id.time_24pm).setVisibility(GONE);
             mView.findViewById(R.id.time_46pm).setVisibility(GONE);
             listener.onSlotAvailable(true);
         } else if (hour > 20) {
-            mView.findViewById(R.id.time_68am).setVisibility(GONE);
+            mView.findViewById(R.id.time_810am).setVisibility(GONE);
             mView.findViewById(R.id.time_1012am).setVisibility(GONE);
             mView.findViewById(R.id.time_24pm).setVisibility(GONE);
             mView.findViewById(R.id.time_46pm).setVisibility(GONE);
@@ -187,7 +187,7 @@ public class TimeSlotHorizontalView extends HorizontalScrollView implements View
 
     void visible() {
         tvEmpty.setVisibility(GONE);
-        mView.findViewById(R.id.time_68am).setVisibility(VISIBLE);
+        mView.findViewById(R.id.time_810am).setVisibility(VISIBLE);
         mView.findViewById(R.id.time_1012am).setVisibility(VISIBLE);
         mView.findViewById(R.id.time_24pm).setVisibility(VISIBLE);
         mView.findViewById(R.id.time_46pm).setVisibility(VISIBLE);

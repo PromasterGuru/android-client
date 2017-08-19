@@ -5,6 +5,7 @@ package com.neeru.client.models;
  */
 
 public class Address {
+    public String address;
     public String line1;
     public String line2;
     public String landMark;

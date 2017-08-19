@@ -1,5 +1,7 @@
 package com.neeru.client.network;
 
+import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -10,9 +12,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.neeru.client.prefs.AuthPreference;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,6 +25,10 @@ import java.util.Map;
  */
 
 public class JsonRequestHandler extends JsonObjectRequest {
+
+
+    public static String HEADER_AUTHORIZATION = "Authorization";
+    public static String HEADER_DEVICE_ID = "device-id";
     private Map header;
 
     public JsonRequestHandler(int method, String url, JSONObject jsonRequest, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map header) {
@@ -48,14 +57,32 @@ public class JsonRequestHandler extends JsonObjectRequest {
     @Override
     protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
 
-        try{
+        try {
             String jsonString = new String(response.data,
                     HttpHeaderParser.parseCharset(response.headers));
             Log.v("RESPONCE", jsonString);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
         return super.parseNetworkResponse(response);
     }
+
+
+    public static Map getFirebaseHeader(Context context) {
+        Map<String, String> map = new HashMap<>();
+        map.put(HEADER_DEVICE_ID, Settings.Secure.getString(context.getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID) );
+        return map;
+    }
+
+    public static Map getHeader(Context context) {
+        Map<String, String> map = new HashMap<>();
+        map.put(HEADER_AUTHORIZATION, new AuthPreference(context).getAccessTocken());
+        map.put(HEADER_DEVICE_ID, Settings.Secure.getString(context.getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID) );
+        return map;
+    }
+
+
 }

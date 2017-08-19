@@ -62,7 +62,8 @@ public class LocationActivity extends AppCompatActivity implements Response.List
         String url = url = Constants.URL + "inventory/v1/location";
 
 
-        jsObjRequest = new JsonRequestHandler(Request.Method.GET, url, null, this, this, null);
+        jsObjRequest = new JsonRequestHandler(Request.Method.GET, url, null, this, this, JsonRequestHandler.getFirebaseHeader(this));
+
         NetworkHandler.getInstance(this).addToRequestQueue(jsObjRequest);
 
 
@@ -71,7 +72,7 @@ public class LocationActivity extends AppCompatActivity implements Response.List
     @Override
     public void onErrorResponse(VolleyError error) {
 
-        Log.v("Error--------", new String(error.networkResponse.data));
+        // Log.v("Error--------", new String(error.networkResponse.data));
     }
 
     @Override
