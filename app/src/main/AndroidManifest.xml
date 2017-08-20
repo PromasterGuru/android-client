@@ -22,12 +22,11 @@
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".RegisterationActivity"
@@ -35,7 +34,7 @@
         <activity
             android:name=".ProductDetailActivity"
             android:label="@string/title_activity_product_detail"
-            android:parentActivityName="com.neeru.client.MainActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppThemeProductDetail">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,7 +42,7 @@
         </activity>
         <activity
             android:name=".FinalOrderActivity"
-            android:parentActivityName="com.neeru.client.ProductDetailActivity"
+            android:parentActivityName=".ProductDetailActivity"
             android:theme="@style/FinalOrderTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -59,20 +58,15 @@
             android:label="@string/title_activity_location"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity android:name=".NotificationActivity" />
-
-
         <activity
             android:name=".OrderActivity"
-            android:label="@string/title_order">
+            android:label="@string/title_order"></activity>
 
-        </activity>
-
-
-        <receiver android:name=".receiver.OtpReader">
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
+        <!--   <receiver android:name=".receiver.OtpReader">
+               <intent-filter>
+                   <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+               </intent-filter>
+           </receiver>-->
 
         <service android:name=".service.ArkFirebaseMessagingService">
             <intent-filter>
@@ -93,7 +87,9 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".SelectAddressActivity">
 
+        </activity>
     </application>
 
 </manifest>

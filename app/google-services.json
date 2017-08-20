@@ -49,6 +49,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387466695657:android:39339ead2c1efe17",
+        "android_client_info": {
+          "package_name": "com.neeru.vender"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "387466695657-66s981g2h5slpciqv5q6a2323tmn1koh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neeru.vender",
+            "certificate_hash": "855cbafec3ca13819f3f7f55d273533d3d108084"
+          }
+        },
+        {
+          "client_id": "387466695657-sb6epgbck43mvrt98en0bheir0ba67a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgTbdXi2vTXid9ggW_iTku0NDDLk_86tM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "387466695657-sb6epgbck43mvrt98en0bheir0ba67a4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

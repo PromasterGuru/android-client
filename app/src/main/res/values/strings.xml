@@ -122,4 +122,14 @@
 
     <string name="text_empty_time">We are not serving same day after 8PM,\n Please select other date.</string>
     <string name="title_order">Orders</string>
+
+
+    <string name="text_add_new_address">Add a New Address</string>
+    <string name="hint_full_name">Full name</string>
+    <string name="hint_pincode">Pincode</string>
+    <string name="hint_flat">Flat / House No. / Floor / Building</string>
+    <string name="hint_colony">Colony / Street / Locality</string>
+    <string name="hint_landmark">Landmark (optional)</string>
+
+
 </resources>

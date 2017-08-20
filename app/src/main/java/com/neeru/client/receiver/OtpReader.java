@@ -24,17 +24,17 @@ public class OtpReader extends BroadcastReceiver {
     /**
      * Constant TAG for logging key.
      */
-    private static final String TAG = "OtpReader";
+    private final String TAG = "OtpReader";
 
     /**
      * The bound OTP Listener that will be trigerred on receiving message.
      */
-    private static OTPListener otpListener;
+    private OTPListener otpListener;
 
     /**
      * The Sender number string.
      */
-    private static List<String> receiverString;
+    private List<String> receiverString;
 
     /**
      * Binds the sender string and listener for callback.
@@ -44,7 +44,7 @@ public class OtpReader extends BroadcastReceiver {
      */
 
 
-    public static void bind(OTPListener listener, List<String> sender) {
+    public void bind(OTPListener listener, List<String> sender) {
         otpListener = listener;
         receiverString = sender;
     }
@@ -69,6 +69,13 @@ public class OtpReader extends BroadcastReceiver {
                 String senderNum = currentMessage.getDisplayOriginatingAddress();
                 String message = currentMessage.getDisplayMessageBody();
                 Log.i(TAG, "senderNum: " + senderNum + " message: " + message);
+
+
+                if(receiverString == null){
+                    return;
+                }
+
+
 
                 for (String str : receiverString) {
                     if (!TextUtils.isEmpty(str) && senderNum.contains(str)) { //If message received is from required number.

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -46,9 +47,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.neeru.client.LocationActivity.INTENT_EXTRA_LOCATION;
+import static com.neeru.client.SelectAddressActivity.INTENT_ADDRESS;
 import static com.neeru.client.fragment.ProductFragment.INTENT_EXTRA_PRODUCT;
 
 public class FinalOrderActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, OrderActionListener, Response.Listener<JSONObject>, Response.ErrorListener {
+
+    public static int RESULT_ADDRESS = 1;
 
 
     private EditText mEditTextDate;
@@ -102,6 +106,10 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
         getWindow().setEnterTransition(buildEnterTransition());
 
 
+        TextView mTVTitle = (TextView) findViewById(R.id.title_product);
+
+        mTVTitle.setText(product.name);
+
         mEditTextDate = (EditText) findViewById(R.id.editText_date);
         mEditTextDate.setOnClickListener(this);
         calender = Calendar.getInstance();
@@ -124,6 +132,8 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
         mQuantityView.setActionListener(this);
 
         mPrice = (TextView) findViewById(R.id.text_price);
+
+        findViewById(R.id.address_container).setOnClickListener(this);
 
     }
 
@@ -152,6 +162,10 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                break;
+            case R.id.address_container:
+                Intent intent = new Intent(this, SelectAddressActivity.class);
+                startActivityForResult(intent, RESULT_ADDRESS);
                 break;
 
         }
@@ -182,7 +196,8 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
             JSONObject jsonObject = new JSONObject();
 
             jsonObject.put("slot", time);
-            jsonObject.put("address", mAddress.line1 + mAddress.line2);
+            jsonObject.put("address", mAddress.fullName +" "+ mAddress.line1);
+            jsonObject.put("addressLine1",mAddress.line1);
             jsonObject.put("paymentMethod", "COD");
             jsonObject.put("totalPrice", product.price * quantity);
             jsonObject.put("locationId", locationId);
@@ -282,4 +297,43 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == RESULT_ADDRESS && data!=null) {
+            mAddress = data.getParcelableExtra(INTENT_ADDRESS);
+            updateAddress();
+
+        }
+    }
+
+    void updateAddress(){
+
+        TextView mName = (TextView) findViewById(R.id.text_address_name);
+        TextView mtVAddress = (TextView) findViewById(R.id.text_address);
+
+        mName.setText(mAddress.fullName);
+
+        String address = "";
+
+        if(mAddress.address !=null){
+            address += mAddress.address +", ";
+        }
+
+        if(mAddress.line1 !=null){
+            address += mAddress.line1+", ";
+        }
+
+        if(mAddress.line2 !=null){
+            address += mAddress.line2+", ";
+        }
+        if(mAddress.landMark !=null){
+            address += mAddress.landMark+", ";
+        }
+
+        address = address.substring(0,address.length()-2);
+
+        mtVAddress.setText(address);
+    }
 }

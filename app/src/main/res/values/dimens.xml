@@ -44,4 +44,6 @@
     <dimen name="button_size_width">60dip</dimen>
     <dimen name="button_size_height">35dip</dimen>
     <dimen name="leftMargin_can">10dp</dimen>
+
+    <dimen name="text_address_size">16.0sp</dimen>
 </resources>

@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
@@ -51,7 +52,6 @@ import java.util.regex.Pattern;
 import static com.neeru.client.RegisterationActivity.INTENT_EXTRA_MOBILE;
 import static com.neeru.client.RegisterationActivity.INTENT_EXTRA_OPERATION;
 import static com.neeru.client.RegisterationActivity.INTENT_EXTRA_OTP;
-import static com.neeru.client.network.JsonRequestHandler.HEADER_DEVICE_ID;
 
 public class OTPVarificationActivity extends AppCompatActivity implements OTPListener, Response.Listener<JSONObject>, Response.ErrorListener, PinEntryView.OnPinEnteredListener {
 
@@ -60,6 +60,7 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
     String operation = null;
     private PinEntryView mOTPView;
     private final Pattern p = Pattern.compile("(\\d{4})");
+    private final OtpReader mybroadcast = new OtpReader();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,13 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
         mList.add("AM-NOTIFY");
         mList.add("HP-PLVSMS");
 
-        OtpReader.bind(this, mList);
+        mybroadcast.bind(this, mList);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.provider.Telephony.SMS_RECEIVED");
+        registerReceiver(mybroadcast, filter);
+
+
         keyboarsetUP();
 
         View v = findViewById(R.id.mRoot);
@@ -219,7 +226,7 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
 
 
         Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 
         this.finish();
@@ -233,7 +240,7 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
         super.onDestroy();
 
         try {
-            unregisterReceiverFromManifest(OtpReader.class, this);
+            unregisterReceiver(mybroadcast);
 
         } catch (Exception e) {
 
@@ -241,15 +248,6 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
 
     }
 
-    private void unregisterReceiverFromManifest(Class<? extends BroadcastReceiver> clazz, final Context context) {
-        final ComponentName component = new ComponentName(context, clazz);
-        final int status = context.getPackageManager().getComponentEnabledSetting(component);
-        if (status == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
-            context.getPackageManager()
-                    .setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                            PackageManager.DONT_KILL_APP);
-        }
-    }
 
 }
 

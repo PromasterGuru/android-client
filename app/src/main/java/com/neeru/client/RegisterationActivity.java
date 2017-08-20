@@ -89,7 +89,7 @@ public class RegisterationActivity extends BaseActivity implements View.OnClickL
             mCircularButton.setProgress(50);
 
             JsonRequestHandler jsObjRequest = new JsonRequestHandler
-                    (Request.Method.POST, url, null, this, this,null);
+                    (Request.Method.POST, url, null, this, this, null);
 
 
             NetworkHandler.getInstance(this).addToRequestQueue(jsObjRequest);
