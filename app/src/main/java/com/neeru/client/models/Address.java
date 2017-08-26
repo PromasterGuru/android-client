@@ -8,32 +8,39 @@ import android.os.Parcelable;
  */
 
 public class Address implements Parcelable {
+    public  int id;
     public String fullName;
     public String address;
     public String line1;
     public String line2;
+    public String landmark;
     public String landMark;
+    public String addressLine1;
 
+    public Address() {}
 
-    public Address(){
-
-    }
 
     protected Address(Parcel in) {
+        id = in.readInt();
         fullName = in.readString();
         address = in.readString();
         line1 = in.readString();
         line2 = in.readString();
+        landmark = in.readString();
         landMark = in.readString();
+        addressLine1 = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(fullName);
         dest.writeString(address);
         dest.writeString(line1);
         dest.writeString(line2);
+        dest.writeString(landmark);
         dest.writeString(landMark);
+        dest.writeString(addressLine1);
     }
 
     @Override

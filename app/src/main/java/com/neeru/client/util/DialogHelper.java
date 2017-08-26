@@ -53,4 +53,21 @@ public class DialogHelper {
 
     }
 
+    public void showProgress(View progress, View root, boolean isShow) {
+        try {
+            if (isShow) {
+                progress.setVisibility(View.VISIBLE);
+                root.setVisibility(View.INVISIBLE);
+            } else {
+                progress.setVisibility(View.INVISIBLE);
+                root.setVisibility(View.VISIBLE);
+            }
+
+        } catch (Exception ex) {
+        }
+
+
+    }
+
+
 }

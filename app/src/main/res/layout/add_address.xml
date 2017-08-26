@@ -18,8 +18,8 @@
         <com.neeru.client.views.ReaderFontTextView
             android:id="@+id/text_add_address"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center"
+            android:layout_height="30dp"
+            android:layout_gravity="left|top"
             android:gravity="center|left"
             android:text="@string/text_add_new_address"
             android:textColor="@color/textColorPrimary"
@@ -88,15 +88,16 @@
 
             <com.neeru.client.views.ButtonView
                 android:id="@+id/save"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:background="@drawable/drawable_blue"
-                android:text="SAVE"
+                android:text="DELIVER TO THIS ADDRESS"
                 android:textColor="#F8F8F6"
                 android:textSize="18sp"
                 app:fontName="Klavika_Bold" />
+
         </LinearLayout>
 
     </LinearLayout>

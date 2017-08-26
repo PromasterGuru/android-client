@@ -14,6 +14,7 @@ import android.transition.Transition;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -68,11 +69,14 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
     private TimeSlotHorizontalView mTimeSlot;
     private View mRoot;
     private Product product;
-    private Address mAddress;
+
     private TextView mPrice;
     private AuthPreference mAuthPref;
     private View mPayment;
     boolean isSlotAvilable;
+    private Address mAddress;
+    private TextView mName;
+    private TextView mtVAddress;
 
 
     @Override
@@ -81,10 +85,6 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
         VolleyLog.DEBUG = true;
         mAuthPref = new AuthPreference(getApplicationContext());
 
-        mAddress = new Address();
-        mAddress.line1 = "MVP Sector 8";
-        mAddress.line2 = "";
-        mAddress.landMark = "Satya sai vidya vihar";
 
         locationId = getIntent().getIntExtra(INTENT_EXTRA_LOCATION, -1);
         product = getIntent().getParcelableExtra(INTENT_EXTRA_PRODUCT);
@@ -135,6 +135,11 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
 
         findViewById(R.id.address_container).setOnClickListener(this);
 
+
+        mName = (TextView) findViewById(R.id.text_address_name);
+        mtVAddress = (TextView) findViewById(R.id.text_address);
+
+        updateAddress();
     }
 
 
@@ -196,12 +201,12 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
             JSONObject jsonObject = new JSONObject();
 
             jsonObject.put("slot", time);
-            jsonObject.put("address", mAddress.fullName +" "+ mAddress.line1);
-            jsonObject.put("addressLine1",mAddress.line1);
+            jsonObject.put("address", mAddress.fullName + " " + mAddress.line1);
+            jsonObject.put("addressLine1", mAddress.line1);
             jsonObject.put("paymentMethod", "COD");
             jsonObject.put("totalPrice", product.price * quantity);
             jsonObject.put("locationId", locationId);
-            jsonObject.put("landmark", mAddress.landMark);
+            jsonObject.put("landmark", mAddress.landmark);
 
             JSONArray itemsArray = new JSONArray();
 
@@ -241,6 +246,9 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
             return false;
         } else if (quantity <= 0) {
             dialogHelper.showSnackBar("Please select at least one Can.", mRoot);
+            return false;
+        } else if (mAddress == null) {
+            dialogHelper.showSnackBar("Please select delivery address.", mRoot);
             return false;
         }
 
@@ -301,38 +309,41 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && requestCode == RESULT_ADDRESS && data!=null) {
+        if (resultCode == RESULT_OK && requestCode == RESULT_ADDRESS && data != null) {
             mAddress = data.getParcelableExtra(INTENT_ADDRESS);
             updateAddress();
 
         }
     }
 
-    void updateAddress(){
+    void updateAddress() {
 
-        TextView mName = (TextView) findViewById(R.id.text_address_name);
-        TextView mtVAddress = (TextView) findViewById(R.id.text_address);
+
+        if (mAddress == null) {
+            mName.setText("");
+            mtVAddress.setText("Please select Address");
+            return;
+        }
+
 
         mName.setText(mAddress.fullName);
 
         String address = "";
 
-        if(mAddress.address !=null){
-            address += mAddress.address +", ";
+        if (mAddress.address != null) {
+            address += mAddress.address + ", ";
         }
 
-        if(mAddress.line1 !=null){
-            address += mAddress.line1+", ";
+        if (mAddress.addressLine1 != null) {
+            address += mAddress.addressLine1 + ", ";
         }
 
-        if(mAddress.line2 !=null){
-            address += mAddress.line2+", ";
-        }
-        if(mAddress.landMark !=null){
-            address += mAddress.landMark+", ";
+
+        if (mAddress.landmark != null) {
+            address += mAddress.landmark + ", ";
         }
 
-        address = address.substring(0,address.length()-2);
+        address = address.substring(0, address.length() - 2);
 
         mtVAddress.setText(address);
     }

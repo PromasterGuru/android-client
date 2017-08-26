@@ -58,5 +58,10 @@ public class AuthPreference {
 
     }
 
+    public void setAccessTocken(String token) {
+        prefs.edit()
+                .putString(KEY_TOKEN, token)
+                .apply();
+    }
 
 }

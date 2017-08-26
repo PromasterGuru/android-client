@@ -1,6 +1,8 @@
 package com.neeru.client;
 
 import android.app.Application;
+import android.content.Context;
+import android.provider.Settings;
 
 import com.google.firebase.FirebaseApp;
 
@@ -14,5 +16,10 @@ public class App extends Application {
         super.onCreate();
 
         FirebaseApp.initializeApp(getApplicationContext());
+    }
+
+    public static String getDeviseID(Context context) {
+        return Settings.Secure.getString(context.getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
     }
 }

@@ -1,22 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.neeru.client.SelectAddressActivity">
 
+
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/address_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
             <include layout="@layout/add_address" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-</LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
+</FrameLayout>
