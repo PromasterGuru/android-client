@@ -237,6 +237,12 @@ public class SelectAddressActivity extends AppCompatActivity implements View.OnC
             Address address = addresses.get(i);
             View view = LayoutInflater.from(this).inflate(R.layout.row_address, null, false);
 
+            if (i == 0) {
+                view.findViewById(R.id.button_layout).setVisibility(View.VISIBLE);
+                ((RadioButton) view.findViewById(R.id.radioButton)).setChecked(true);
+            }
+
+
             updateAddress(address, i, view);
 
             mAddressContainer.addView(view);
@@ -276,6 +282,7 @@ public class SelectAddressActivity extends AppCompatActivity implements View.OnC
         btnEdit.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
         btnDeliver.setOnClickListener(this);
+
 
     }
 
@@ -334,8 +341,7 @@ public class SelectAddressActivity extends AppCompatActivity implements View.OnC
     }
 
 
-
-    void returnData(Address address){
+    void returnData(Address address) {
         Intent intent = new Intent();
         intent.putExtra(INTENT_ADDRESS, address);
 
