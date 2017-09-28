@@ -10,7 +10,7 @@
 
     <dimen name="presence_name_status_margin_left">20.0dip</dimen>
     <dimen name="text_size_dynamic_s5">16.0sp</dimen>
-    <dimen name="presence_avatar_margin_left">11.0dip</dimen>
+    <dimen name="presence_avatar_margin_left">4.0dip</dimen>
     <dimen name="navdrawer_width">300.0dip</dimen>
     <dimen name="circle_width">4.0dip</dimen>
     <dimen name="grid_count_text_size">25sp</dimen>
@@ -46,4 +46,6 @@
     <dimen name="leftMargin_can">10dp</dimen>
 
     <dimen name="text_address_size">16.0sp</dimen>
+    <dimen name="corner">48dp</dimen>
+
 </resources>

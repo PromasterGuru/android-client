@@ -202,11 +202,12 @@ public class FinalOrderActivity extends AppCompatActivity implements View.OnClic
 
             jsonObject.put("slot", time);
             jsonObject.put("address", mAddress.fullName + " " + mAddress.line1);
-            jsonObject.put("addressLine1", mAddress.line1);
             jsonObject.put("paymentMethod", "COD");
             jsonObject.put("totalPrice", product.price * quantity);
             jsonObject.put("locationId", locationId);
-            jsonObject.put("landmark", mAddress.landmark);
+            jsonObject.put("fullName", mAddress.fullName);
+            jsonObject.put("landmark", mAddress.fullName);
+
 
             JSONArray itemsArray = new JSONArray();
 

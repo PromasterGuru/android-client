@@ -9,6 +9,7 @@ public enum ApiStatus {
     GET,
     POST,
     PUT,
+    IMAGE_UPLOAD,
     DELETE;
 
 

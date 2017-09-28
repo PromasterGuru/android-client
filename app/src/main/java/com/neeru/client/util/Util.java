@@ -1,5 +1,9 @@
 package com.neeru.client.util;
 
+import android.content.Context;
+import android.net.Uri;
+
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -62,4 +66,22 @@ public class Util {
 
         }
     }
+
+
+    public static File getFile(Context context, Uri uri) {
+        if (uri != null) {
+            String path = FileUtils.getPath(context, uri);
+            if (path != null && isLocal(path)) {
+                return new File(path);
+            }
+        }
+        return null;
+    }
+    public static boolean isLocal(String url) {
+        if (url != null && !url.startsWith("http://") && !url.startsWith("https://")) {
+            return true;
+        }
+        return false;
+    }
+
 }

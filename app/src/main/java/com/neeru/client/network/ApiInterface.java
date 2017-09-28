@@ -2,7 +2,9 @@ package com.neeru.client.network;
 
 
 import com.neeru.client.models.Address;
+import com.neeru.client.models.User;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
@@ -37,4 +39,12 @@ public interface ApiInterface {
     @DELETE("auth/v1/address/{id}")
     Call<Address> deleteAddress(@HeaderMap Map<String, String> headers, @Path("id") int id);
 
+
+
+
+    @PUT("auth/v1/user")
+    Call<List<User>> updateUser(@HeaderMap Map<String, String> headers, @Body User user);
+
+    @DELETE("/auth/v1/signout")
+    Call<Type> signOut();
 }

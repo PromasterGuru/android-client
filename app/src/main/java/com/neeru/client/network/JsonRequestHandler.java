@@ -9,6 +9,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -68,11 +69,20 @@ public class JsonRequestHandler extends JsonObjectRequest {
         return super.parseNetworkResponse(response);
     }
 
+    @Override
+    protected VolleyError parseNetworkError(VolleyError volleyError) {
+
+        String str = new String(volleyError.networkResponse.data);
+        Log.v("Erorro-->", str);
+
+        return super.parseNetworkError(volleyError);
+    }
+
 
     public static Map getFirebaseHeader(Context context) {
         Map<String, String> map = new HashMap<>();
         map.put(HEADER_DEVICE_ID, Settings.Secure.getString(context.getApplicationContext().getContentResolver(),
-                Settings.Secure.ANDROID_ID) );
+                Settings.Secure.ANDROID_ID));
         return map;
     }
 
@@ -80,7 +90,7 @@ public class JsonRequestHandler extends JsonObjectRequest {
         Map<String, String> map = new HashMap<>();
         map.put(HEADER_AUTHORIZATION, new AuthPreference(context).getAccessTocken());
         map.put(HEADER_DEVICE_ID, Settings.Secure.getString(context.getApplicationContext().getContentResolver(),
-                Settings.Secure.ANDROID_ID) );
+                Settings.Secure.ANDROID_ID));
         return map;
     }
 

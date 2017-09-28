@@ -25,15 +25,13 @@ package com.neeru.client.models;
 
 public class User {
 
-    public int id;
+    public Integer id;
     public String firstName;
     public String lastName;
-    public String password;
     public String avatar;
     public String contact;
     public String email;
     public String description;
-    public String otp;
     public String roles;
     public String accessToken;
 }

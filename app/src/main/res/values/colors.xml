@@ -32,4 +32,7 @@
     <color name="date_grey">#C0C5C4</color>
     <color name="color_apple">#71C341</color>
 
+    <color name="transparent">#00000000</color>
+    <color name="custom_header_text">#030303</color>
+
 </resources>

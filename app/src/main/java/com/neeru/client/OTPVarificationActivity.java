@@ -1,12 +1,8 @@
 package com.neeru.client;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.provider.Settings;
@@ -16,21 +12,15 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.neeru.client.callbacks.OTPListener;
 import com.neeru.client.models.User;
-import com.neeru.client.network.GsonRequest;
 import com.neeru.client.network.JsonRequestHandler;
 import com.neeru.client.network.NetworkHandler;
 import com.neeru.client.prefs.AuthPreference;
@@ -39,16 +29,14 @@ import com.neeru.client.util.Constants;
 import com.neeru.client.views.PinEntryView;
 import com.neeru.client.views.ReaderFontTextView;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.neeru.client.EditProfileActivity.INTENT_EXTRA_FROM_REGISTER;
 import static com.neeru.client.RegisterationActivity.INTENT_EXTRA_MOBILE;
 import static com.neeru.client.RegisterationActivity.INTENT_EXTRA_OPERATION;
 import static com.neeru.client.RegisterationActivity.INTENT_EXTRA_OTP;
@@ -82,6 +70,7 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
 
         List<String> mList = new ArrayList<>();
         mList.add("AM-NOTIFY");
+        mList.add("AD-NOTIFY");
         mList.add("HP-PLVSMS");
 
         mybroadcast.bind(this, mList);
@@ -225,7 +214,8 @@ public class OTPVarificationActivity extends AppCompatActivity implements OTPLis
         mAuth.setUser(user);
 
 
-        Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
+        Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
+        intent.putExtra(INTENT_EXTRA_FROM_REGISTER, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 

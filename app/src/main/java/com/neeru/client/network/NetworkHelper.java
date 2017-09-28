@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.neeru.client.App;
 import com.neeru.client.models.Address;
+import com.neeru.client.models.User;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -59,6 +60,16 @@ public class NetworkHelper {
     public void deleteAddress(Integer position, String token, Context context, int id) {
         executePost(RetrofitApiHelper.initApiClient().deleteAddress(getHeaders(token, context), id), ApiStatus.DELETE, position);
     }
+
+
+    public void updateUser(String token,Context context,User user) {
+        executePost(RetrofitApiHelper.initApiClient().updateUser(getHeaders(token, context), user), ApiStatus.DELETE, -1);
+    }
+
+    public void updateAvater(String token,Context context,User user) {
+        executePost(RetrofitApiHelper.initApiClient().updateUser(getHeaders(token, context), user), ApiStatus.IMAGE_UPLOAD, -1);
+    }
+
 
 
     Map getHeaders(String token, Context context) {

@@ -37,7 +37,7 @@ public class AuthPreference {
         }
 
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(KEY_TOKEN, "Bearer "+user.accessToken);
+        editor.putString(KEY_TOKEN, "Bearer " + user.accessToken);
         editor.putString(KEY_MOBILE, user.contact);
         editor.putString(KEY_EMAIL, user.email);
         editor.putString(KEY_FNAME, user.firstName);
@@ -52,6 +52,33 @@ public class AuthPreference {
     }
 
 
+    public void saveUser(@Nullable User user) {
+        if (user == null) {
+
+        }
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_EMAIL, user.email);
+        editor.putString(KEY_FNAME, user.firstName);
+        editor.putString(KEY_LNAME, user.lastName);
+        editor.apply();
+
+    }
+
+
+    public User getUser() {
+        User user = new User();
+        user.email = prefs.getString(KEY_EMAIL, null);
+        user.firstName = prefs.getString(KEY_FNAME, null);
+        user.lastName = prefs.getString(KEY_LNAME, null);
+        user.avatar = prefs.getString(KEY_AVATAR, null);
+        user.roles = prefs.getString(KEY_ROLE, null);
+        user.contact = prefs.getString(KEY_MOBILE, null);
+        return user;
+
+    }
+
+
     public String getAccessTocken() {
 
         return prefs.getString(KEY_TOKEN, null);
@@ -62,6 +89,16 @@ public class AuthPreference {
         prefs.edit()
                 .putString(KEY_TOKEN, token)
                 .apply();
+    }
+
+    public void saveAvatar(String imageUrl) {
+        prefs.edit()
+                .putString(KEY_AVATAR, imageUrl)
+                .apply();
+    }
+
+    public void clear() {
+        prefs.edit().clear().commit();
     }
 
 }

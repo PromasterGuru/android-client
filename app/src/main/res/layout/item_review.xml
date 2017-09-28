@@ -11,11 +11,13 @@
     android:paddingRight="2dp"
     android:paddingTop="10dp">
 
-    <com.neeru.client.views.AvatarImageView
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/drawer_header_profilePic"
         android:layout_width="62.0dip"
         android:layout_height="62.0dip"
-        android:scaleType="fitXY"
+        android:clickable="false"
         android:src="@drawable/ic_avatar_default" />
 
 
