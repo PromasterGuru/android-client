@@ -2,6 +2,7 @@ package com.neeru.client.network;
 
 
 import com.neeru.client.models.Address;
+import com.neeru.client.models.Review;
 import com.neeru.client.models.User;
 
 import java.lang.reflect.Type;
@@ -12,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -44,6 +46,9 @@ public interface ApiInterface {
 
     @PUT("auth/v1/user")
     Call<List<User>> updateUser(@HeaderMap Map<String, String> headers, @Body User user);
+
+    @POST("inventory/v1/review")
+    Call<Review> createReview(@Header(HEADER_AUTHORIZATION) String header, @Body Review review);
 
     @DELETE("/auth/v1/signout")
     Call<Type> signOut();

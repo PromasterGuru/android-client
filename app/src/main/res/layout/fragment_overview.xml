@@ -33,6 +33,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/rating_view"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -40,11 +41,13 @@
 
 
                         <ImageView
+                            android:id="@+id/ivRating"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/product_detail_imageHeight"
                             app:srcCompat="@drawable/ic_star_border" />
 
                         <TextView
+                            android:id="@+id/textrating"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"

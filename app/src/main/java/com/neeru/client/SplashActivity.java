@@ -80,7 +80,7 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
     void launch() {
 
         AuthPreference mPrefs = new AuthPreference(getApplicationContext());
-       // mPrefs.setAccessTocken("Bearer PZziur3IC0eOpij06wIxt6-cokImizxv8SqkeS5ygc-jy5CQ-vZBN76gEWmU3h03");
+
 
         String token = mPrefs.getAccessTocken();
 

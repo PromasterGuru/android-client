@@ -22,8 +22,10 @@ import com.neeru.client.adapter.ReviewAdapter;
 import com.neeru.client.callbacks.OnReviewLoad;
 import com.neeru.client.models.Product;
 import com.neeru.client.models.Review;
+import com.neeru.client.models.User;
 import com.neeru.client.network.GsonRequest;
 import com.neeru.client.network.NetworkHandler;
+import com.neeru.client.prefs.AuthPreference;
 import com.neeru.client.util.Constants;
 import com.neeru.client.views.EmptyRecyclerView;
 
@@ -46,7 +48,7 @@ public class ReviewFragment extends Fragment implements Response.Listener<Review
     private int productID;
     private View mRoot;
     private RecyclerView mRecyclerView;
-    private List<Review> items;
+    private List<Review> items = new ArrayList<>();
     private ReviewAdapter mAdapter;
     private OnReviewLoad listener;
 
@@ -97,7 +99,7 @@ public class ReviewFragment extends Fragment implements Response.Listener<Review
     }
 
 
-    void init() {
+    public void init() {
 
 
         String url = Constants.URL + "inventory/v1/review?productId=" + productID;
@@ -107,6 +109,8 @@ public class ReviewFragment extends Fragment implements Response.Listener<Review
         }.getType();
 
         GsonRequest<Review[]> request = new GsonRequest(url, Review[].class, null, this, this);
+
+
         NetworkHandler.getInstance(getActivity()).addToRequestQueue(request);
     }
 
@@ -119,14 +123,47 @@ public class ReviewFragment extends Fragment implements Response.Listener<Review
     @Override
     public void onResponse(Review[] response) {
 
+        items.clear();
+        items.addAll(Arrays.asList(response));
 
-        items = Arrays.asList(response);
+        if (mAdapter == null) {
+            mAdapter = new ReviewAdapter(getActivity(), items);
+            mRecyclerView.setAdapter(mAdapter);
+        } else {
+            mAdapter.notifyDataSetChanged();
+        }
 
-        mAdapter = new ReviewAdapter(getActivity(), items);
-        mRecyclerView.setAdapter(mAdapter);
+
+
+
+        AuthPreference mAuth = new AuthPreference(getActivity());
+
+
+        int id = mAuth.getUserID();
+
+        boolean isRevied = false;
+        int total = 0;
+
+        for (Review review : response) {
+            if (review.userId == id) {
+                if (!isRevied)
+                    isRevied = true;
+            }
+            total += review.rating;
+        }
+
+
+        int avg = total/items.size();
 
         if (listener != null)
-            listener.onLoad(items.size());
+            listener.onLoad(items.size(),avg);
+
+        if (isRevied) {
+            if (listener != null)
+                listener.isReviewed();
+        }
+
+
 
     }
 }

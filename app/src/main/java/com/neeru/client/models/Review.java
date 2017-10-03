@@ -16,26 +16,30 @@ public class Review implements Parcelable {
     public String firstName;
     public String createdAt;
     public String updatedAt;
+    public int productId;
 
+    public Review() {
+    }
 
     protected Review(Parcel in) {
-        this.rating = in.readInt();
-        this.feedback = in.readString();
-        this.firstName = in.readString();
-        this.userId = in.readInt();
-        this.createdAt = in.readString();
-        this.updatedAt = in.readString();
+        rating = in.readInt();
+        feedback = in.readString();
+        userId = in.readInt();
+        firstName = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        productId = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
         dest.writeInt(rating);
         dest.writeString(feedback);
         dest.writeInt(userId);
         dest.writeString(firstName);
         dest.writeString(createdAt);
         dest.writeString(updatedAt);
+        dest.writeInt(productId);
     }
 
     @Override
@@ -55,3 +59,6 @@ public class Review implements Parcelable {
         }
     };
 }
+
+
+

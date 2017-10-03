@@ -67,6 +67,8 @@
 
     <string name="text_order_total">Order Total</string>
     <string name="action_accept">Accept</string>
+    <string name="text_review">Write a short review</string>
+    <string name="hint_review">Tell us what you think about this product</string>
 
 
     <string name="rs">\u20B9</string>
@@ -134,6 +136,6 @@
     <string name="hint_flat">Flat / House No. / Floor / Building</string>
     <string name="hint_colony">Colony / Street / Locality</string>
     <string name="hint_landmark">Landmark (optional)</string>
-
-
+    <string name="action_cancel">CANCEL</string>
+    <string name="action_submit">SUBMIT</string>
 </resources>

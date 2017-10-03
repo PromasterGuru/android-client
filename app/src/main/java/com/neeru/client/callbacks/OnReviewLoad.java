@@ -5,5 +5,7 @@ package com.neeru.client.callbacks;
  */
 
 public interface OnReviewLoad {
-    void onLoad(int count);
+    void onLoad(int count, float avg);
+    void onReviewSubmission();
+    void isReviewed();
 }

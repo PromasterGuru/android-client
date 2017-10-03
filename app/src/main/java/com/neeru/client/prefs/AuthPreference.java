@@ -13,6 +13,8 @@ import com.neeru.client.models.User;
 public class AuthPreference {
 
     private final String NAME = "prefs_user";
+
+    private final String KEY_ID = "key_id";
     private final String KEY_TOKEN = "key_token";
     private final String KEY_MOBILE = "key_mobile";
     private final String KEY_FNAME = "key_fname";
@@ -38,6 +40,7 @@ public class AuthPreference {
 
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_TOKEN, "Bearer " + user.accessToken);
+        editor.putInt(KEY_ID, user.id);
         editor.putString(KEY_MOBILE, user.contact);
         editor.putString(KEY_EMAIL, user.email);
         editor.putString(KEY_FNAME, user.firstName);
@@ -58,6 +61,7 @@ public class AuthPreference {
         }
 
         SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(KEY_ID, user.id);
         editor.putString(KEY_EMAIL, user.email);
         editor.putString(KEY_FNAME, user.firstName);
         editor.putString(KEY_LNAME, user.lastName);
@@ -82,6 +86,12 @@ public class AuthPreference {
     public String getAccessTocken() {
 
         return prefs.getString(KEY_TOKEN, null);
+
+    }
+
+    public int getUserID() {
+
+        return prefs.getInt(KEY_ID, -1);
 
     }
 

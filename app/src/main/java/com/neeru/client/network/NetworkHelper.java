@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.neeru.client.App;
 import com.neeru.client.models.Address;
+import com.neeru.client.models.Review;
 import com.neeru.client.models.User;
 
 import java.io.IOException;
@@ -70,6 +71,10 @@ public class NetworkHelper {
         executePost(RetrofitApiHelper.initApiClient().updateUser(getHeaders(token, context), user), ApiStatus.IMAGE_UPLOAD, -1);
     }
 
+
+    public void createReview(String token,Review review) {
+        executePost(RetrofitApiHelper.initApiClient().createReview(token, review), ApiStatus.POST, -1);
+    }
 
 
     Map getHeaders(String token, Context context) {

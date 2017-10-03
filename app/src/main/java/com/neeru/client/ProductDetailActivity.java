@@ -1,39 +1,23 @@
 package com.neeru.client;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Slide;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
 import com.neeru.client.adapter.pager.ProductDetailPagerAdapter;
 import com.neeru.client.callbacks.OnReviewLoad;
-import com.neeru.client.models.Location;
+import com.neeru.client.fragment.OverViewFragment;
+import com.neeru.client.fragment.ReviewFragment;
 import com.neeru.client.models.Product;
-import com.neeru.client.network.NetworkHandler;
-import com.neeru.client.util.State;
+import com.neeru.client.util.DialogHelper;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -51,8 +35,13 @@ public class ProductDetailActivity extends AppCompatActivity implements OnReview
     private ProductDetailPagerAdapter mAdapter;
     private Product product;
     DecimalFormat twoDForm = new DecimalFormat("#.##");
+    DecimalFormat oneDForm = new DecimalFormat("#.#");
     private TextView mReviewCount;
     private int locationID;
+    private View mRoot;
+    private RatingBar mRating;
+    private TextView mTextRating;
+
 
 
     @Override
@@ -61,6 +50,8 @@ public class ProductDetailActivity extends AppCompatActivity implements OnReview
         setContentView(R.layout.activity_product_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mRoot = findViewById(R.id.root_view);
 
         product = getIntent().getParcelableExtra(INTENT_EXTRA_PRODUCT);
         locationID = getIntent().getIntExtra(INTENT_EXTRA_LOCATION, -1);
@@ -87,22 +78,28 @@ public class ProductDetailActivity extends AppCompatActivity implements OnReview
         ImageView ivCover = (ImageView) findViewById(R.id.ivCover);
         TextView mTvTitle = (TextView) findViewById(R.id.tvTitle);
         TextView mPrice = (TextView) findViewById(R.id.textView_price);
+        mTextRating = (TextView) findViewById(R.id.textRating);
         mReviewCount = (TextView) findViewById(R.id.text_review_count);
 
 
-        RatingBar mRating = (RatingBar) findViewById(R.id.product_rating);
+
+        mRating = (RatingBar) findViewById(R.id.product_rating);
         mRating.setRating(Float.valueOf(twoDForm.format(product.reviews.rating)));
         Picasso.with(getApplicationContext()).load(product.avatar).error(R.drawable.water_can).into(ivCover);
         mTvTitle.setText(product.name);
         mPrice.setText("" + product.price);
+        mTextRating.setText(oneDForm.format(product.reviews.rating));
 
 
     }
 
 
     @Override
-    public void onLoad(int count) {
+    public void onLoad(int count, float avg) {
+        product.reviews.rating = avg;
         mReviewCount.setText("(" + count + ")");
+        mRating.setRating(Float.valueOf(twoDForm.format(avg)));
+        mTextRating.setText(oneDForm.format(avg));
     }
 
     @Override
@@ -115,4 +112,38 @@ public class ProductDetailActivity extends AppCompatActivity implements OnReview
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public void onReviewSubmission() {
+
+        DialogHelper dialogHelper = new DialogHelper();
+        dialogHelper.showSnackBar("Your review is submitted successfully", mRoot);
+
+        ReviewFragment fragment = (ReviewFragment) getFragment(1);
+
+        if (fragment != null) {
+            fragment.init();
+        }
+
+
+    }
+
+    @Override
+    public void isReviewed() {
+        OverViewFragment fragment = (OverViewFragment) getFragment(0);
+
+        if(fragment !=null){
+            fragment.isReviewed();
+        }
+
+
+
+    }
+
+    private Fragment getFragment(int pos) {
+        return getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + (pos));
+    }
+
+
 }
